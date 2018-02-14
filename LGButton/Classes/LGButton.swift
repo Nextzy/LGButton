@@ -1,24 +1,25 @@
 //
 //  LGButton.swift
-//  LGButtonDemo
+//  Rocket
 //
-//  Created by Lorenzo Greco on 28/05/2017.
-//  Copyright © 2017 Lorenzo Greco. All rights reserved.
+//  Created by Thongpak on 14/2/2561 BE.
+//  Copyright © 2561 thongpak. All rights reserved.
 //
+
+import Foundation
 import UIKit
 import QuartzCore
 
-
 @IBDesignable
-public class LGButton: UIControl {
+open class LGButton: UIControl {
     
     enum TouchAlphaValues : CGFloat {
         case touched = 0.7
         case untouched = 1.0
     }
-
+    
     let touchDisableRadius : CGFloat = 100.0
-
+    
     let availableFontIcons = ["fa", "io", "oc", "ic", "ma", "ti", "mi"]
     
     var gradient : CAGradientLayer?
@@ -53,7 +54,7 @@ public class LGButton: UIControl {
     
     public var isLoading = false {
         didSet {
-           showLoadingView()
+            showLoadingView()
         }
     }
     
@@ -348,7 +349,7 @@ public class LGButton: UIControl {
         setupView()
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         if gradient != nil {
             gradient?.removeFromSuperlayer()
             gradient = nil
@@ -357,7 +358,7 @@ public class LGButton: UIControl {
         setupBorderAndCorners()
     }
     
-    override public var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         return CGSize(width: 10, height: 10)
     }
     
@@ -416,7 +417,7 @@ public class LGButton: UIControl {
             let d = pow(sinf((2*Float(Double.pi)*((xAngle+0.5)/2))),2)
             gradient!.startPoint = CGPoint(x: CGFloat(a), y: CGFloat(b))
             gradient!.endPoint = CGPoint(x: CGFloat(c), y: CGFloat(d))
-        
+            
             bgContentView.layer.addSublayer(gradient!)
         }
     }
@@ -613,12 +614,12 @@ public class LGButton: UIControl {
             touchAlpha = (pressed) ? .touched : .untouched
         }
     }
-
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         pressed = true
     }
     
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
         let shouldSendActions = pressed
         pressed = false
         if shouldSendActions{
@@ -626,7 +627,7 @@ public class LGButton: UIControl {
         }
     }
     
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
         if let touchLoc = touches.first?.location(in: self){
             if (touchLoc.x < -touchDisableRadius ||
                 touchLoc.y < -touchDisableRadius ||
@@ -640,7 +641,7 @@ public class LGButton: UIControl {
         }
     }
     
-    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         pressed = false
     }
     
